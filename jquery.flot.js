@@ -1984,35 +1984,10 @@ Licensed under the MIT license.
                         } else {
                             x = Math.floor(x) + 0.5;
                         }
-                    }
-
-                    if (options.grid.tickPattern) {
-                        var style = null;
-                        var pattern = null;
-                        console.log(options.grid.tickPattern);
-                        if (axis.direction === "x" && options.grid.tickPattern.xaxis !== undefined) {
-                            style = options.grid.tickPattern.xaxis.style;
-                            pattern = options.grid.tickPattern.xaxis.pattern;
-                        } else if (axis.direction === "y" && options.grid.tickPattern.yaxis !== undefined) {
-                            style = options.grid.tickPattern.yaxis.style;;
-                            pattern = options.grid.tickPattern.yaxis.pattern;
-                        }
-
-                        console.log(style);
-                        if (style === 'dotted') {
-                            dashedLineTo(ctx, x, y, x + xoff, y + yoff, [1, 1]);
-                        } else if (style === 'dashed') {
-                            dashedLineTo(ctx, x, y, x + xoff, y + yoff, pattern);
-                        } else {  //if not defined or solid
-                            ctx.moveTo(x, y);
-                            ctx.lineTo(x + xoff, y + yoff);
-                        }
-                        
-                    }
-                    else {
-                        ctx.moveTo(x, y);
-                        ctx.lineTo(x + xoff, y + yoff);
-                    }
+                    }                    
+                    
+                    ctx.moveTo(x, y);
+                    ctx.lineTo(x + xoff, y + yoff);
                     ctx.stroke();
                 }
 
@@ -2055,8 +2030,33 @@ Licensed under the MIT license.
                             y = Math.floor(y) + 0.5;
                     }
 
-                    ctx.moveTo(x, y);
-                    ctx.lineTo(x + xoff, y + yoff);
+                    if (options.grid.tickPattern) {
+                        var style = null;
+                        var pattern = null;
+                        console.log(options.grid.tickPattern);
+                        if (axis.direction === "x" && options.grid.tickPattern.xaxis !== undefined) {
+                            style = options.grid.tickPattern.xaxis.style;
+                            pattern = options.grid.tickPattern.xaxis.pattern;
+                        } else if (axis.direction === "y" && options.grid.tickPattern.yaxis !== undefined) {
+                            style = options.grid.tickPattern.yaxis.style;;
+                            pattern = options.grid.tickPattern.yaxis.pattern;
+                        }
+
+                        console.log(style);
+                        if (style === 'dotted') {
+                            dashedLineTo(ctx, x, y, x + xoff, y + yoff, [1, 1]);
+                        } else if (style === 'dashed') {
+                            dashedLineTo(ctx, x, y, x + xoff, y + yoff, pattern);
+                        } else {  //if not defined or solid
+                            ctx.moveTo(x, y);
+                            ctx.lineTo(x + xoff, y + yoff);
+                        }
+
+                    }
+                    else {
+                        ctx.moveTo(x, y);
+                        ctx.lineTo(x + xoff, y + yoff);
+                    }
                 }
 
                 ctx.stroke();
